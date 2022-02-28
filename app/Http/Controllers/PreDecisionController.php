@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PreDecision;
+use App\Models\PreDecision;
 use Illuminate\Http\Request;
 
 class PreDecisionController extends Controller

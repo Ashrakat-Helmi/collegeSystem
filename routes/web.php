@@ -16,13 +16,55 @@ use App\Http\Controllers\Employee\EmployeeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('welcome');
+
+/* blog */
+Route::view('blog', 'layouts.blog')->name('blog');
+Route::get('blog', 'NewsController@index')->name('blog.index');
+Route::get('blog/{News}', "NewsController@show")->name('blog.show');
+// ## Create
+Route::get('blog/create', "NewsController@create")->name('blog.create');
+// ## insert
+Route::post('blog/create', "NewsController@store")->name('blog.store');
+// ## display 1 item
+Route::get('blog/show/{id}', "NewsController@show")->name('blog.show');
+// ## edit page
+Route::get('blog/edit/{id}', "NewsController@edit")->name('blog.edit');
+// ## update
+Route::post('blog/edit/{id}', "NewsController@update")->name('blog.update');
+// ## Destroy
+Route::get('blog/delete/{id}', "NewsController@destroy")->name('blog.destroy');
+
+
+
+
+/* desires */
+Route::middleware(['auth:web', 'PreventBackHistory'])->group(function () {
+
+    Route::get('desires', "DesiresController@index")->name('desires.index');
+    Route::get('desires/create', "DesiresController@create")->name('desires.create');
+    Route::post('desires/create', "DesiresController@store")->name('desires.store');
+    // ## display 1 item
+    Route::get('desires/show/{id}', "DesiresController@show")->name('desires.show');
+    // ## edit page
+    Route::get('desires/edit/{id}', "DesiresController@edit")->name('desires.edit');
+    // ## update
+    Route::post('desires/edit/{id}', "DesiresController@update")->name('desires.update');
+    // ## Destroy
+    Route::get('desires/delete/{id}', "DesiresController@destroy")->name('desires.destroy');
+});
+
+Route::get('/programs', 'ProgramsController@index')->name('programs');
+
+
+
+
+Route::view('appliedStudents', 'layouts.appliedStudents')->name('appliedStudents');
+Route::get('appliedStudents', 'AppliedDesiresController@index')->name('appliedStudents.index');
+
+
 
 Route::prefix('user')->name('user.')->group(function () {
 
@@ -67,6 +109,3 @@ Route::prefix('employee')->name('employee.')->group(function () {
         Route::post('/logout', [EmployeeController::class, 'logout'])->name('logout');
     });
 });
-
-
-Route::get('/home', 'HomeController@index')->name('home');

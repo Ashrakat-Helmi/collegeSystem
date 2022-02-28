@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Programs;
+
+use App\Models\Programs;
 use Illuminate\Http\Request;
+use App\Models\desires;
+use App\Http\Controllers\DesiresController;
 
 class ProgramsController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,11 @@ class ProgramsController extends Controller
      */
     public function index()
     {
-        //
+      //  $Programs = Programs::all(); //fetch all blog posts from DB
+       // return view('desires.create', [
+          //  'Programs' => $Programs,
+       // ]); //returns the view with posts
+
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\FinalDecision;
+use App\Models\FinalDecision;
 use Illuminate\Http\Request;
 
 class FinalDecisionController extends Controller

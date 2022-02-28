@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $posts = News::all(); //fetch all blog posts from DB
+        $posts = News::orderBy('created_at', 'desc')->limit(4)->get();
+        return view('welcome', [
+            'posts' => $posts,
+        ]); //returns the view with posts
+        return view('welcome');
     }
 }

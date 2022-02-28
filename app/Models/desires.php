@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class desires extends Model
 {
     protected $fillable = [
-        'firstDesire','secondDesire','thirdDesire','userId',
+        'firstDesire','secondDesire','thirdDesire','userid'
     ];
     protected $table ='desires';
 }

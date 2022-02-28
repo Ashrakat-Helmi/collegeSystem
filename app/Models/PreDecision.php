@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PreDecision extends Model
 {
+
     protected $fillable = [
-        'userId','status',
+        'userId',
+        'status',
     ];
-    protected $table ='PreDecision';
+    protected $table ='pre_decisions';
 }
