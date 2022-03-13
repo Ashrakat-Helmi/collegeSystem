@@ -14,7 +14,7 @@ class AddForeignKeysToApplieddesiresTable extends Migration
     public function up()
     {
         Schema::table('applieddesires', function (Blueprint $table) {
-            $table->foreign(['id'], 'applieddesires_ibfk_1')->references(['id'])->on('users');
+            $table->foreign(['userId'], 'applieddesires_ibfk_1')->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

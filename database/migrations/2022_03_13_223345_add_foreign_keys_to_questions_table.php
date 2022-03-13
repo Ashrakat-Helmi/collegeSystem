@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToDesiresTable extends Migration
+class AddForeignKeysToQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddForeignKeysToDesiresTable extends Migration
      */
     public function up()
     {
-        Schema::table('desires', function (Blueprint $table) {
-            $table->foreign(['userId'], 'desires_ibfk_1')->references(['id'])->on('users');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign(['userId'], 'questions_ibfk_1')->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -25,8 +25,8 @@ class AddForeignKeysToDesiresTable extends Migration
      */
     public function down()
     {
-        Schema::table('desires', function (Blueprint $table) {
-            $table->dropForeign('desires_ibfk_1');
+        Schema::table('questions', function (Blueprint $table) {
+            $table->dropForeign('questions_ibfk_1');
         });
     }
 }

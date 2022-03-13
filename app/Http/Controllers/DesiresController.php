@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\desires;
+use App\Models\FinalDecision;
 use App\Models\PreDecision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Programs;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DesiresController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
 
     function store(Request $request)
     {
@@ -44,10 +41,25 @@ class DesiresController extends Controller
             DB::commit();
 
             $predecision = [
+                'id' => auth()->user()->id,
                 'userId' => auth()->user()->id,
                 'status' => $request->status = 'pending',
             ];
             DB::table('pre_decisions')->insert($predecision);
+            DB::commit();
+
+
+            $finaldecision = FinalDecision::join('pre_decisions', 'final_decisions.preDecisionId', '=', 'pre_decisions.id')
+                ->get(['final_decisions.*', 'pre_decisions.id']);
+
+
+            $finaldecision = [
+                'userId' => auth()->user()->id,
+                'preDecisionId' => auth()->user()->id,
+                'programId' => $request->firstDesire,
+                'status' => $request->status = 'pending',
+            ];
+            DB::table('final_decisions')->insert($finaldecision);
             DB::commit();
 
             if ($save) {
@@ -60,14 +72,31 @@ class DesiresController extends Controller
 
     public function index()
     {
-        $predecision = PreDecision::all(); //fetch all blog posts from DB
-        $userId = auth()->user()->id;
-        $ESNAME = PreDecision::select('status')->where('userid', $userId)->get();
-        $desires = desires::where('userid', '=', $userId)->get();
+        if (Auth::guard('web')->check()) {
+            $predecision = PreDecision::all(); //fetch all blog posts from DB
+            $userId = auth()->user()->id;
+            $ESNAME = PreDecision::select('status')->where('userid', $userId)->get();
+            $desires = desires::where('userid', '=', $userId)->get();
 
-        return view('desires.index', [
-            'pre_decision' => $predecision,
-        ], compact('ESNAME'))->with('desires', $desires); //returns the view with posts
+            $users = DB::table('users')
+                ->join('applieddesires', 'users.id', '=', 'applieddesires.userId')
+                ->join('pre_decisions', 'users.id', '=', 'pre_decisions.userId')
+                ->select('users.englishDegree', 'users.highSchoolTotalMarks', 'applieddesires.*',  'pre_decisions.status')
+                ->get();
+            $drives = user::where('id', '=', $userId)->get();
+
+            $users2 = User::where('id', $userId)->first();
+            $rsltActualPrice = round(($users2->englishDegree / $users2->highSchoolTotalMarks) * 100, 2);
+            return view('desires.index', [
+                'pre_decision' => $predecision,
+                'users' => $users,
+                'users2' => $users2,
+                'drives' => $drives,
+            ], compact('ESNAME', 'users', 'users2', 'drives', 'rsltActualPrice'))->with('desires', $desires);
+        } else {
+            return view('dashboard.employee.registered-students');
+        }
+        //returns the view with posts
 
 
 

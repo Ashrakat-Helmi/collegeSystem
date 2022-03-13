@@ -1,1420 +1,1168 @@
 @extends('layouts.app')
-
 @section('content')
-    <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
-    </head>
+    <section style="background-color: #eee;">
+        <link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css"
+            rel="stylesheet" />
+        <script>
+            $.fn.poshytip = {
+                defaults: null
+            }
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.min.js">
+        </script>
+        </head>
 
-    <body>
+        <body>
 
-        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-            <div class="app-header header-shadow">
-                <div class="app-header__logo">
-                    <div class="logo-src"></div>
-                    <div class="header__pane ml-auto">
-                        <div>
-                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-                                data-class="closed-sidebar">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="app-header__mobile-menu">
-                    <div>
-                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <div class="app-header__menu">
-                    <span>
-                        <button type="button"
-                            class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                            <span class="btn-icon-wrapper">
-                                <i class="fa fa-ellipsis-v fa-w-6"></i>
-                            </span>
-                        </button>
-                    </span>
-                </div>
-                <div class="app-header__content">
-                    <div class="app-header-left">
-                        <div class="search-wrapper">
-                            <div class="input-holder">
-                                <input type="text" class="search-input" placeholder="Type to search">
-                                <button class="search-icon"><span></span></button>
-                            </div>
-                            <button class="close"></button>
-                        </div>
-                        <ul class="header-menu nav">
-                            <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link">
-                                    <i class="nav-link-icon fa fa-database"> </i>
-                                    Statistics
-                                </a>
-                            </li>
-                            <li class="btn-group nav-item">
-                                <a href="javascript:void(0);" class="nav-link">
-                                    <i class="nav-link-icon fa fa-edit"></i>
-                                    Projects
-                                </a>
-                            </li>
-                            <li class="dropdown nav-item">
-                                <a href="javascript:void(0);" class="nav-link">
-                                    <i class="nav-link-icon fa fa-cog"></i>
-                                    Settings
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="app-header-right">
-                        <div class="header-btn-lg pr-0">
-                            <div class="widget-content p-0">
-                                <div class="widget-content-wrapper">
-                                    <div class="widget-content-left">
-                                        <div class="btn-group">
-                                            <a href="{{ route('admin.logout') }}"
-                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                                            <form action="{{ route('admin.logout') }}" method="POST" class="d-none"
-                                                id="logout-form">@csrf</form>
-                                        </div>
-                                    </div>
-                                    <div class="widget-content-left  ml-3 header-user-info">
-                                        <div class="widget-heading">
-                                            {{ Auth::guard('admin')->user()->name }}
-                                        </div>
-                                        <div class="widget-subheading">
-                                            {{ Auth::guard('admin')->user()->email }}
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ui-theme-settings">
-                <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
-                    <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
-                </button>
-                <div class="theme-settings__inner">
-                    <div class="scrollbar-container">
-                        <div class="theme-settings__options-wrapper">
-                            <h3 class="themeoptions-heading">Layout Options
-                            </h3>
-                            <div class="p-3">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="switch has-switch switch-container-class"
-                                                        data-class="fixed-header">
-                                                        <div class="switch-animate switch-on">
-                                                            <input type="checkbox" checked data-toggle="toggle"
-                                                                data-onstyle="success">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Fixed Header
-                                                    </div>
-                                                    <div class="widget-subheading">Makes the header top fixed, always
-                                                        visible!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="switch has-switch switch-container-class"
-                                                        data-class="fixed-sidebar">
-                                                        <div class="switch-animate switch-on">
-                                                            <input type="checkbox" checked data-toggle="toggle"
-                                                                data-onstyle="success">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Fixed Sidebar
-                                                    </div>
-                                                    <div class="widget-subheading">Makes the sidebar left fixed, always
-                                                        visible!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="widget-content p-0">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left mr-3">
-                                                    <div class="switch has-switch switch-container-class"
-                                                        data-class="fixed-footer">
-                                                        <div class="switch-animate switch-off">
-                                                            <input type="checkbox" data-toggle="toggle"
-                                                                data-onstyle="success">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="widget-content-left">
-                                                    <div class="widget-heading">Fixed Footer
-                                                    </div>
-                                                    <div class="widget-subheading">Makes the app footer bottom fixed, always
-                                                        visible!
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="themeoptions-heading">
+            <div class="app-container app-theme-white body-tabs-shadow fixed-header">
+                <div class="app-main">
+                    <div class="app-sidebar sidebar-shadow">
+                        <div class="app-header__logo">
+                            <h1 class="text-white">HU</h1>
+                            <div class="header__pane ml-auto">
                                 <div>
-                                    Header Options
+                                    <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                        data-class="closed-sidebar">
+                                        <span class="hamburger-box">
+                                            <span class="hamburger-inner"></span>
+                                        </span>
+                                    </button>
                                 </div>
-                                <button type="button"
-                                    class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-header-cs-class"
-                                    data-class="">
-                                    Restore Default
-                                </button>
-                            </h3>
-                            <div class="p-3">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5 class="pb-2">Choose Color Scheme
-                                        </h5>
-                                        <div class="theme-settings-swatches">
-                                            <div class="swatch-holder bg-primary switch-header-cs-class"
-                                                data-class="bg-primary header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-secondary switch-header-cs-class"
-                                                data-class="bg-secondary header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-success switch-header-cs-class"
-                                                data-class="bg-success header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-info switch-header-cs-class"
-                                                data-class="bg-info header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-warning switch-header-cs-class"
-                                                data-class="bg-warning header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-danger switch-header-cs-class"
-                                                data-class="bg-danger header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-light switch-header-cs-class"
-                                                data-class="bg-light header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-dark switch-header-cs-class"
-                                                data-class="bg-dark header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-focus switch-header-cs-class"
-                                                data-class="bg-focus header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-alternate switch-header-cs-class"
-                                                data-class="bg-alternate header-text-light">
-                                            </div>
-                                            <div class="divider">
-                                            </div>
-                                            <div class="swatch-holder bg-vicious-stance switch-header-cs-class"
-                                                data-class="bg-vicious-stance header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-midnight-bloom switch-header-cs-class"
-                                                data-class="bg-midnight-bloom header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-night-sky switch-header-cs-class"
-                                                data-class="bg-night-sky header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-slick-carbon switch-header-cs-class"
-                                                data-class="bg-slick-carbon header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-asteroid switch-header-cs-class"
-                                                data-class="bg-asteroid header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-royal switch-header-cs-class"
-                                                data-class="bg-royal header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-warm-flame switch-header-cs-class"
-                                                data-class="bg-warm-flame header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-night-fade switch-header-cs-class"
-                                                data-class="bg-night-fade header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-sunny-morning switch-header-cs-class"
-                                                data-class="bg-sunny-morning header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-tempting-azure switch-header-cs-class"
-                                                data-class="bg-tempting-azure header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-amy-crisp switch-header-cs-class"
-                                                data-class="bg-amy-crisp header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-heavy-rain switch-header-cs-class"
-                                                data-class="bg-heavy-rain header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-mean-fruit switch-header-cs-class"
-                                                data-class="bg-mean-fruit header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-malibu-beach switch-header-cs-class"
-                                                data-class="bg-malibu-beach header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-deep-blue switch-header-cs-class"
-                                                data-class="bg-deep-blue header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-ripe-malin switch-header-cs-class"
-                                                data-class="bg-ripe-malin header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-arielle-smile switch-header-cs-class"
-                                                data-class="bg-arielle-smile header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-plum-plate switch-header-cs-class"
-                                                data-class="bg-plum-plate header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-fisher switch-header-cs-class"
-                                                data-class="bg-happy-fisher header-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-itmeo switch-header-cs-class"
-                                                data-class="bg-happy-itmeo header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-mixed-hopes switch-header-cs-class"
-                                                data-class="bg-mixed-hopes header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-strong-bliss switch-header-cs-class"
-                                                data-class="bg-strong-bliss header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-grow-early switch-header-cs-class"
-                                                data-class="bg-grow-early header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-love-kiss switch-header-cs-class"
-                                                data-class="bg-love-kiss header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-premium-dark switch-header-cs-class"
-                                                data-class="bg-premium-dark header-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-green switch-header-cs-class"
-                                                data-class="bg-happy-green header-text-light">
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="themeoptions-heading">
-                                <div>Sidebar Options</div>
-                                <button type="button"
-                                    class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-sidebar-cs-class"
-                                    data-class="">
-                                    Restore Default
-                                </button>
-                            </h3>
-                            <div class="p-3">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5 class="pb-2">Choose Color Scheme
-                                        </h5>
-                                        <div class="theme-settings-swatches">
-                                            <div class="swatch-holder bg-primary switch-sidebar-cs-class"
-                                                data-class="bg-primary sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-secondary switch-sidebar-cs-class"
-                                                data-class="bg-secondary sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-success switch-sidebar-cs-class"
-                                                data-class="bg-success sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-info switch-sidebar-cs-class"
-                                                data-class="bg-info sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-warning switch-sidebar-cs-class"
-                                                data-class="bg-warning sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-danger switch-sidebar-cs-class"
-                                                data-class="bg-danger sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-light switch-sidebar-cs-class"
-                                                data-class="bg-light sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-dark switch-sidebar-cs-class"
-                                                data-class="bg-dark sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-focus switch-sidebar-cs-class"
-                                                data-class="bg-focus sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-alternate switch-sidebar-cs-class"
-                                                data-class="bg-alternate sidebar-text-light">
-                                            </div>
-                                            <div class="divider">
-                                            </div>
-                                            <div class="swatch-holder bg-vicious-stance switch-sidebar-cs-class"
-                                                data-class="bg-vicious-stance sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-midnight-bloom switch-sidebar-cs-class"
-                                                data-class="bg-midnight-bloom sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-night-sky switch-sidebar-cs-class"
-                                                data-class="bg-night-sky sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-slick-carbon switch-sidebar-cs-class"
-                                                data-class="bg-slick-carbon sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-asteroid switch-sidebar-cs-class"
-                                                data-class="bg-asteroid sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-royal switch-sidebar-cs-class"
-                                                data-class="bg-royal sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-warm-flame switch-sidebar-cs-class"
-                                                data-class="bg-warm-flame sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-night-fade switch-sidebar-cs-class"
-                                                data-class="bg-night-fade sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-sunny-morning switch-sidebar-cs-class"
-                                                data-class="bg-sunny-morning sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-tempting-azure switch-sidebar-cs-class"
-                                                data-class="bg-tempting-azure sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-amy-crisp switch-sidebar-cs-class"
-                                                data-class="bg-amy-crisp sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-heavy-rain switch-sidebar-cs-class"
-                                                data-class="bg-heavy-rain sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-mean-fruit switch-sidebar-cs-class"
-                                                data-class="bg-mean-fruit sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-malibu-beach switch-sidebar-cs-class"
-                                                data-class="bg-malibu-beach sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-deep-blue switch-sidebar-cs-class"
-                                                data-class="bg-deep-blue sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-ripe-malin switch-sidebar-cs-class"
-                                                data-class="bg-ripe-malin sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-arielle-smile switch-sidebar-cs-class"
-                                                data-class="bg-arielle-smile sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-plum-plate switch-sidebar-cs-class"
-                                                data-class="bg-plum-plate sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-fisher switch-sidebar-cs-class"
-                                                data-class="bg-happy-fisher sidebar-text-dark">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-itmeo switch-sidebar-cs-class"
-                                                data-class="bg-happy-itmeo sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-mixed-hopes switch-sidebar-cs-class"
-                                                data-class="bg-mixed-hopes sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-strong-bliss switch-sidebar-cs-class"
-                                                data-class="bg-strong-bliss sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-grow-early switch-sidebar-cs-class"
-                                                data-class="bg-grow-early sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-love-kiss switch-sidebar-cs-class"
-                                                data-class="bg-love-kiss sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-premium-dark switch-sidebar-cs-class"
-                                                data-class="bg-premium-dark sidebar-text-light">
-                                            </div>
-                                            <div class="swatch-holder bg-happy-green switch-sidebar-cs-class"
-                                                data-class="bg-happy-green sidebar-text-light">
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="themeoptions-heading">
-                                <div>Main Content Options</div>
-                                <button type="button"
-                                    class="btn-pill btn-shadow btn-wide ml-auto active btn btn-focus btn-sm">Restore
-                                    Default
-                                </button>
-                            </h3>
-                            <div class="p-3">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <h5 class="pb-2">Page Section Tabs
-                                        </h5>
-                                        <div class="theme-settings-swatches">
-                                            <div role="group" class="mt-2 btn-group">
-                                                <button type="button"
-                                                    class="btn-wide btn-shadow btn-primary btn btn-secondary switch-theme-class"
-                                                    data-class="body-tabs-line">
-                                                    Line
-                                                </button>
-                                                <button type="button"
-                                                    class="btn-wide btn-shadow btn-primary active btn btn-secondary switch-theme-class"
-                                                    data-class="body-tabs-shadow">
-                                                    Shadow
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="app-main">
-                <div class="app-sidebar sidebar-shadow">
-                    <div class="app-header__logo">
-                        <div class="logo-src"></div>
-                        <div class="header__pane ml-auto">
+                        <div class="app-header__mobile-menu">
                             <div>
-                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-                                    data-class="closed-sidebar">
+                                <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
                                     <span class="hamburger-box">
                                         <span class="hamburger-inner"></span>
                                     </span>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="app-header__mobile-menu">
-                        <div>
-                            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
+                        <div class="app-header__menu">
+                            <span>
+                                <button type="button"
+                                    class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                                    <span class="btn-icon-wrapper">
+                                        <i class="fa fa-ellipsis-v fa-w-6"></i>
+                                    </span>
+                                </button>
+                            </span>
                         </div>
-                    </div>
-                    <div class="app-header__menu">
-                        <span>
-                            <button type="button"
-                                class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                                <span class="btn-icon-wrapper">
-                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
-                                </span>
-                            </button>
-                        </span>
-                    </div>
-                    <div class="scrollbar-sidebar">
-                        <div class="app-sidebar__inner">
-                            <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading">Dashboards</li>
-                                <li>
-                                    <a href="index.html" class="mm-active">
-                                        <i class="metismenu-icon pe-7s-rocket"></i>
-                                        Dashboard Example 1
-                                    </a>
-                                </li>
-                                <li class="app-sidebar__heading">UI Components</li>
-                                <li>
-                                    <a href="#">
-                                        <i class="metismenu-icon pe-7s-diamond"></i>
-                                        Elements
-                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="elements-buttons-standard.html">
-                                                <i class="metismenu-icon"></i>
-                                                Buttons
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-dropdowns.html">
-                                                <i class="metismenu-icon">
-                                                </i>Dropdowns
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-icons.html">
-                                                <i class="metismenu-icon">
-                                                </i>Icons
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-badges-labels.html">
-                                                <i class="metismenu-icon">
-                                                </i>Badges
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-cards.html">
-                                                <i class="metismenu-icon">
-                                                </i>Cards
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-list-group.html">
-                                                <i class="metismenu-icon">
-                                                </i>List Groups
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-navigation.html">
-                                                <i class="metismenu-icon">
-                                                </i>Navigation Menus
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="elements-utilities.html">
-                                                <i class="metismenu-icon">
-                                                </i>Utilities
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="metismenu-icon pe-7s-car"></i>
-                                        Components
-                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a href="components-tabs.html">
-                                                <i class="metismenu-icon">
-                                                </i>Tabs
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-accordions.html">
-                                                <i class="metismenu-icon">
-                                                </i>Accordions
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-notifications.html">
-                                                <i class="metismenu-icon">
-                                                </i>Notifications
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-modals.html">
-                                                <i class="metismenu-icon">
-                                                </i>Modals
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-progress-bar.html">
-                                                <i class="metismenu-icon">
-                                                </i>Progress Bar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-tooltips-popovers.html">
-                                                <i class="metismenu-icon">
-                                                </i>Tooltips &amp; Popovers
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-carousel.html">
-                                                <i class="metismenu-icon">
-                                                </i>Carousel
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-calendar.html">
-                                                <i class="metismenu-icon">
-                                                </i>Calendar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-pagination.html">
-                                                <i class="metismenu-icon">
-                                                </i>Pagination
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-scrollable-elements.html">
-                                                <i class="metismenu-icon">
-                                                </i>Scrollable
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="components-maps.html">
-                                                <i class="metismenu-icon">
-                                                </i>Maps
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="tables-regular.html">
-                                        <i class="metismenu-icon pe-7s-display2"></i>
-                                        Tables
-                                    </a>
-                                </li>
-                                <li class="app-sidebar__heading">Widgets</li>
-                                <li>
-                                    <a href="dashboard-boxes.html">
-                                        <i class="metismenu-icon pe-7s-display2"></i>
-                                        Dashboard Boxes
-                                    </a>
-                                </li>
-                                <li class="app-sidebar__heading">Forms</li>
-                                <li>
-                                    <a href="forms-controls.html">
-                                        <i class="metismenu-icon pe-7s-mouse">
-                                        </i>Forms Controls
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forms-layouts.html">
-                                        <i class="metismenu-icon pe-7s-eyedropper">
-                                        </i>Forms Layouts
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="forms-validation.html">
-                                        <i class="metismenu-icon pe-7s-pendrive">
-                                        </i>Forms Validation
-                                    </a>
-                                </li>
-                                <li class="app-sidebar__heading">Charts</li>
-                                <li>
-                                    <a href="charts-chartjs.html">
-                                        <i class="metismenu-icon pe-7s-graph2">
-                                        </i>ChartJS
-                                    </a>
-                                </li>
-                                <li class="app-sidebar__heading">PRO Version</li>
-                                <li>
-                                    <a href="https://dashboardpack.com/theme-details/architectui-dashboard-html-pro/"
-                                        target="_blank">
-                                        <i class="metismenu-icon pe-7s-graph2">
-                                        </i>
-                                        Upgrade to PRO
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="app-main__outer">
-                    <div class="app-main__inner">
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-midnight-bloom">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Total Students</div>
-                                            <div class="widget-subheading">Last year expenses</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span>1896</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-arielle-smile">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Clients</div>
-                                            <div class="widget-subheading">Total Clients Profit</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span>$ 568</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-grow-early">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Followers</div>
-                                            <div class="widget-subheading">People Interested</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span>46%</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content bg-premium-dark">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Products Sold</div>
-                                            <div class="widget-subheading">Revenue streams</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-warning"><span>$14M</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-lg-6">
-                                <div class="mb-3 card">
-                                    <div class="card-header-tab card-header-tab-animation card-header">
-                                        <div class="card-header-title">
-                                            <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
-                                            Sales Report
-                                        </div>
-                                        <ul class="nav">
-                                            <li class="nav-item"><a href="javascript:void(0);"
-                                                    class="active nav-link">Last</a></li>
-                                            <li class="nav-item"><a href="javascript:void(0);"
-                                                    class="nav-link second-tab-toggle">Current</a></li>
+                        <div class="scrollbar-sidebar">
+                            <div class="app-sidebar__inner">
+                                <ul class="vertical-nav-menu">
+                                    <li class="app-sidebar__heading">Dashboard</li>
+                                    <li>
+                                        <a href="index.html" class="mm-active">
+                                            <i class="metismenu-icon pe-7s-home"></i>
+                                            Homepage
+                                        </a>
+                                    </li>
+
+                                    <li class="app-sidebar__heading">Students</li>
+                                    <li>
+                                        <a href="{{ route('employee.registered') }}">
+                                            <i class="metismenu-icon pe-7s-note2">
+                                            </i>Applications Controller
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-study"></i>
+                                            Applied Students
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('appliedStudents.index') }}">
+                                                    <i class="metismenu-icon"></i>
+                                                    <i class="mr-2 text-right-icon pe-7s-info"></i>
+                                                    Counter
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('questions.index') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-help1"></i>
+                                                    Questions
+                                                </a>
+                                            </li>
                                         </ul>
+                                    </li>
+                                    <li class="app-sidebar__heading">Control Panel</li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-config"></i>
+                                            Admins
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('admin.admins') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-users"></i>
+                                                    All Admins
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('admin.createadmin') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-add-user"></i>
+                                                    </i>Add
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-portfolio"></i>
+                                            Employees
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('admin.employees') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-users"></i>
+                                                    All Employees
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('admin.createemp') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-add-user"></i>
+                                                    </i>Add
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-user"></i>
+                                            Users
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="{{ route('admin.users') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-users"></i>
+                                                    All Users
+
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('admin.createuser') }}">
+                                                    <i class="mr-2 text-right-icon pe-7s-add-user"></i>
+                                                    </i>Add
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--<li class="app-sidebar__heading">SOCIAL MEDIA</li>
+                                                                            <li>
+                                                                                <a href="#">
+                                                                                    <i class="metismenu-icon pe-7s-comment"></i>
+                                                                                    Follow Us
+                                                                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                                                                </a>
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <a href="">
+                                                                                            <i class="mr-3 text-right-icon fab fa-facebook-f"></i>
+                                                                                            Facebook
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="">
+                                                                                            <i class="mr-2 text-right-icon fab fa-twitter"></i>
+                                                                                            </i>Twitter
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-main__outer">
+                        <div class="app-main__inner">
+                            <div class="row">
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card mb-3 widget-content bg-danger">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading text-white">Total Admins</div>
+                                                <div class="text-white opacity-75">Total Registered Admins</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white">
+                                                    <span class="ml-5">{{ $adminsCOUNTER }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="tabs-eg-77">
-                                                <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
-                                                    <div class="widget-chat-wrapper-outer">
-                                                        <div
-                                                            class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
-                                                            <canvas id="canvas"></canvas>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card mb-3 widget-content bg-orange">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading text-white">Total Employees</div>
+                                                <div class="text-white opacity-75">Total Registered Employees</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white">
+                                                    <span class="ml-5">{{ $employeesCOUNTER }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="card mb-3 widget-content bg-primary">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left text-white">
+                                                <div class="widget-heading text-white">Total Users</div>
+                                                <div class="text-white opacity-75">Total Registered Users</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white"><span
+                                                        class="ml-5">{{ $USERSCOUNTER }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="mb-3 card">
+                                        <div class="card-header-tab card-header-tab-animation card-header">
+                                            <div class="card-header-title">
+                                                <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                                Fake Chart
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade show active" id="tabs-eg-77">
+                                                    <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                                        <div class="widget-chat-wrapper-outer">
+                                                            <div
+                                                                class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
+                                                                <canvas id="canvas"></canvas>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h6
-                                                    class="text-muted text-uppercase font-size-md opacity-5 font-weight-normal">
-                                                    Top Authors</h6>
-                                                <div class="scroll-area-sm">
-                                                    <div class="scrollbar-container">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="mb-3 card">
+                                        <div class="card-header-tab card-header-tab-animation card-header">
+                                            <div class="card-header-title">
+                                                Top AVG Students
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="scroll-area-md">
+                                                <div class="scrollbar-container">
+                                                    @foreach ($users26 as $data)
                                                         <ul
                                                             class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
                                                             <li class="list-group-item">
                                                                 <div class="widget-content p-0">
                                                                     <div class="widget-content-wrapper">
-                                                                        <div class="widget-content-left mr-3">
-                                                                            <img width="42" class="rounded-circle"
-                                                                                src="assets/images/avatars/9.jpg" alt="">
-                                                                        </div>
-                                                                        <div class="widget-content-left">
-                                                                            <div class="widget-heading">Ella-Rose Henry
+                                                                        <div class="widget-content-left mr-5">
+                                                                            <div class="widget-heading text-uppercase">
+                                                                                {{ $data->name }}</div>
+                                                                            <div class="widget-subheading">
+                                                                                {{ $data->firstDesire }}
                                                                             </div>
-                                                                            <div class="widget-subheading">Web Developer
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="widget-content-right">
-                                                                            <div class="font-size-xlg text-muted">
-                                                                                <small class="opacity-5 pr-1">$</small>
-                                                                                <span>129</span>
-                                                                                <small class="text-danger pl-2">
-                                                                                    <i class="fa fa-angle-down"></i>
-                                                                                </small>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <div class="widget-content p-0">
-                                                                    <div class="widget-content-wrapper">
-                                                                        <div class="widget-content-left mr-3">
-                                                                            <img width="42" class="rounded-circle"
-                                                                                src="assets/images/avatars/5.jpg" alt="">
-                                                                        </div>
-                                                                        <div class="widget-content-left">
-                                                                            <div class="widget-heading">Ruben Tillman</div>
-                                                                            <div class="widget-subheading">UI Designer
+                                                                            <div class="widget-subheading">
+                                                                                English <span
+                                                                                    class="text-danger">{{ $data->englishDegree }}
+                                                                                </span>-
+                                                                                Total <span
+                                                                                    class="text-orange">{{ $data->highSchoolTotalMarks }}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="widget-content-right">
-                                                                            <div class="font-size-xlg text-muted">
-                                                                                <small class="opacity-5 pr-1">$</small>
-                                                                                <span>54</span>
-                                                                                <small class="text-success pl-2">
-                                                                                    <i class="fa fa-angle-up"></i>
-                                                                                </small>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <div class="widget-content p-0">
-                                                                    <div class="widget-content-wrapper">
-                                                                        <div class="widget-content-left mr-3">
-                                                                            <img width="42" class="rounded-circle"
-                                                                                src="assets/images/avatars/4.jpg" alt="">
-                                                                        </div>
-                                                                        <div class="widget-content-left">
-                                                                            <div class="widget-heading">Vinnie Wagstaff
-                                                                            </div>
-                                                                            <div class="widget-subheading">Java Programmer
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="widget-content-right">
-                                                                            <div class="font-size-xlg text-muted">
-                                                                                <small class="opacity-5 pr-1">$</small>
-                                                                                <span>429</span>
-                                                                                <small class="text-warning pl-2">
-                                                                                    <i class="fa fa-dot-circle"></i>
-                                                                                </small>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <div class="widget-content p-0">
-                                                                    <div class="widget-content-wrapper">
-                                                                        <div class="widget-content-left mr-3">
-                                                                            <img width="42" class="rounded-circle"
-                                                                                src="assets/images/avatars/3.jpg" alt="">
-                                                                        </div>
-                                                                        <div class="widget-content-left">
-                                                                            <div class="widget-heading">Ella-Rose Henry
-                                                                            </div>
-                                                                            <div class="widget-subheading">Web Developer
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="widget-content-right">
-                                                                            <div class="font-size-xlg text-muted">
-                                                                                <small class="opacity-5 pr-1">$</small>
-                                                                                <span>129</span>
-                                                                                <small class="text-danger pl-2">
-                                                                                    <i class="fa fa-angle-down"></i>
-                                                                                </small>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="list-group-item">
-                                                                <div class="widget-content p-0">
-                                                                    <div class="widget-content-wrapper">
-                                                                        <div class="widget-content-left mr-3">
-                                                                            <img width="42" class="rounded-circle"
-                                                                                src="assets/images/avatars/2.jpg" alt="">
-                                                                        </div>
-                                                                        <div class="widget-content-left">
-                                                                            <div class="widget-heading">Ruben Tillman</div>
-                                                                            <div class="widget-subheading">UI Designer
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="widget-content-right">
-                                                                            <div class="font-size-xlg text-muted">
-                                                                                <small class="opacity-5 pr-1">$</small>
-                                                                                <span>54</span>
-                                                                                <small class="text-success pl-2">
-                                                                                    <i class="fa fa-angle-up"></i>
-                                                                                </small>
-                                                                            </div>
+                                                                            <span
+                                                                                class="display-6 text-success">{{ round(((($data->englishDegree / 60) * 100 + ($data->highSchoolTotalMarks / 300) * 100) / 200) * 100, 1) }}</span>
+                                                                            <small class="text-danger">
+                                                                                <i class="text-dark fa fa-percent"></i>
+                                                                            </small>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <div class="mb-3 card">
-                                    <div class="card-header-tab card-header">
-                                        <div class="card-header-title">
-                                            <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
-                                            Bandwidth Reports
-                                        </div>
-                                        <div class="btn-actions-pane-right">
-                                            <div class="nav">
-                                                <a href="javascript:void(0);"
-                                                    class="border-0 btn-pill btn-wide btn-transition active btn btn-outline-alternate">Tab
-                                                    1</a>
-                                                <a href="javascript:void(0);"
-                                                    class="ml-1 btn-pill btn-wide border-0 btn-transition  btn btn-outline-alternate second-tab-toggle-alt">Tab
-                                                    2</a>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="main-card mb-3 card text-center">
+                                            <div class="card-head mx-5 mt-2">
+                                                <nav class="mt-4 text-center">
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                        <a class="nav-link active" id="nav-first-tab" data-toggle="tab"
+                                                            href="#nav-first" role="tab" aria-controls="nav-first"
+                                                            aria-selected="false"><span
+                                                                class="text-primary">Users</span></a>
+                                                        <a class="nav-link" id="nav-second-tab" data-toggle="tab"
+                                                            href="#nav-second" role="tab" aria-controls="nav-second"
+                                                            aria-selected="false"><span
+                                                                class="text-orange">Employees</span></a>
+                                                        <a class="nav-link" id="nav-third-tab" data-toggle="tab"
+                                                            href="#nav-third" role="tab" aria-controls="nav-third"
+                                                            aria-selected="true"><span
+                                                                class="text-danger">Admins</span></a>
+                                                    </div>
+                                                </nav>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade active show" id="tab-eg-55">
-                                            <div class="widget-chart p-3">
-                                                <div style="height: 350px">
-                                                    <canvas id="line-chart"></canvas>
-                                                </div>
-                                                <div class="widget-chart-content text-center mt-5">
-                                                    <div class="widget-description mt-0 text-warning">
-                                                        <i class="fa fa-arrow-left"></i>
-                                                        <span class="pl-1">175.5%</span>
-                                                        <span class="text-muted opacity-8 pl-1">increased server
-                                                            resources</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pt-2 card-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="widget-content">
-                                                            <div class="widget-content-outer">
-                                                                <div class="widget-content-wrapper">
-                                                                    <div class="widget-content-left">
-                                                                        <div class="widget-numbers fsize-3 text-muted">63%
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="widget-content-right">
-                                                                        <div class="text-muted opacity-6">Generated Leads
-                                                                        </div>
-                                                                    </div>
+                                            <div class="tab-content" id="nav-tabContent">
+                                                <div class="tab-pane fade" id="nav-third" role="tabpanel"
+                                                    aria-labelledby="nav-third-tab">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-md-0">
+                                                            <div class="card-body">
+                                                                <p class="breadcrumb alert alert-dark text-small">Tab the
+                                                                    cell
+                                                                    to edit.
+                                                                </p>
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                                        @csrf
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center">ID</th>
+                                                                                <th>Name</th>
+                                                                                <th class="text-center">Email</th>
+                                                                                <th class="text-center">Phone</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach ($admins as $admin)
+                                                                                <tr class="bg-white">
+                                                                                    <td class="text-center text-dark">
+                                                                                        {{ $admin->id }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="widget-heading text-dark">
+                                                                                            <a href=""
+                                                                                                class="update"
+                                                                                                data-name="name"
+                                                                                                data-type="text"
+                                                                                                data-pk="{{ $admin->id }}"
+                                                                                                data-title="Enter name">{{ $admin->name }}</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="update"
+                                                                                            data-name="email"
+                                                                                            data-type="email"
+                                                                                            data-pk="{{ $admin->id }}"
+                                                                                            data-title="Enter name">{{ $admin->email }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="update"
+                                                                                            data-name="phone"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $admin->id }}"
+                                                                                            data-title="Enter name">{{ $admin->phone }}</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
-                                                                <div class="widget-progress-wrapper mt-1">
-                                                                    <div
-                                                                        class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                        <div class="progress-bar bg-danger"
-                                                                            role="progressbar" aria-valuenow="63"
-                                                                            aria-valuemin="0" aria-valuemax="100"
-                                                                            style="width: 63%;"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="widget-content">
-                                                            <div class="widget-content-outer">
-                                                                <div class="widget-content-wrapper">
-                                                                    <div class="widget-content-left">
-                                                                        <div class="widget-numbers fsize-3 text-muted">32%
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="widget-content-right">
-                                                                        <div class="text-muted opacity-6">Submitted Tickers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="widget-progress-wrapper mt-1">
-                                                                    <div
-                                                                        class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                        <div class="progress-bar bg-success"
-                                                                            role="progressbar" aria-valuenow="32"
-                                                                            aria-valuemin="0" aria-valuemax="100"
-                                                                            style="width: 32%;"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="widget-content">
-                                                            <div class="widget-content-outer">
-                                                                <div class="widget-content-wrapper">
-                                                                    <div class="widget-content-left">
-                                                                        <div class="widget-numbers fsize-3 text-muted">71%
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="widget-content-right">
-                                                                        <div class="text-muted opacity-6">Server Allocation
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="widget-progress-wrapper mt-1">
-                                                                    <div
-                                                                        class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                        <div class="progress-bar bg-primary"
-                                                                            role="progressbar" aria-valuenow="71"
-                                                                            aria-valuemin="0" aria-valuemax="100"
-                                                                            style="width: 71%;"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="widget-content">
-                                                            <div class="widget-content-outer">
-                                                                <div class="widget-content-wrapper">
-                                                                    <div class="widget-content-left">
-                                                                        <div class="widget-numbers fsize-3 text-muted">41%
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="widget-content-right">
-                                                                        <div class="text-muted opacity-6">Generated Leads
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="widget-progress-wrapper mt-1">
-                                                                    <div
-                                                                        class="progress-bar-sm progress-bar-animated-alt progress">
-                                                                        <div class="progress-bar bg-warning"
-                                                                            role="progressbar" aria-valuenow="41"
-                                                                            aria-valuemin="0" aria-valuemax="100"
-                                                                            style="width: 41%;"></div>
-                                                                    </div>
+                                                                <div class="d-block text-right card-footer">
+                                                                    <a href="{{ route('admin.createadmin') }}"
+                                                                        class="btn-wide btn btn-success btn-sm">Add New
+                                                                        Admin</a>
+                                                                    <a href="{{ route('admin.admins') }}"
+                                                                        class="btn-wide btn btn-orange text-white btn-sm">View
+                                                                        All
+                                                                        Admins</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content">
-                                    <div class="widget-content-outer">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Total Orders</div>
-                                                <div class="widget-subheading">Last year expenses</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-success">1896</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content">
-                                    <div class="widget-content-outer">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Products Sold</div>
-                                                <div class="widget-subheading">Revenue streams</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-warning">$3M</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content">
-                                    <div class="widget-content-outer">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Followers</div>
-                                                <div class="widget-subheading">People Interested</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-danger">45,9%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
-                                <div class="card mb-3 widget-content">
-                                    <div class="widget-content-outer">
-                                        <div class="widget-content-wrapper">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Income</div>
-                                                <div class="widget-subheading">Expected totals</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-focus">$147</div>
-                                            </div>
-                                        </div>
-                                        <div class="widget-progress-wrapper">
-                                            <div class="progress-bar-sm progress-bar-animated-alt progress">
-                                                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="54"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%;"></div>
-                                            </div>
-                                            <div class="progress-sub-label">
-                                                <div class="sub-label-left">Expenses</div>
-                                                <div class="sub-label-right">100%</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="main-card mb-3 card">
-                                    <div class="card-header">Active Users
-                                        <div class="btn-actions-pane-right">
-                                            <div role="group" class="btn-group-sm btn-group">
-                                                <button class="active btn btn-focus">Last Week</button>
-                                                <button class="btn btn-focus">All Month</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">#</th>
-                                                    <th>Name</th>
-                                                    <th class="text-center">City</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center text-muted">#345</td>
-                                                    <td>
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-3">
-                                                                    <div class="widget-content-left">
-                                                                        <img width="40" class="rounded-circle"
-                                                                            src="assets/images/avatars/4.jpg" alt="">
-                                                                    </div>
+                                                <div class="tab-pane fade" id="nav-second" role="tabpanel"
+                                                    aria-labelledby="nav-second-tab">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-md-0">
+                                                            <div class="card-body">
+                                                                <p class="breadcrumb alert alert-dark text-small">Tab the
+                                                                    cell
+                                                                    to edit.
+                                                                </p>
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                                        @csrf
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center">ID</th>
+                                                                                <th>Name</th>
+                                                                                <th class="text-center">Email</th>
+                                                                                <th class="text-center">Phone</th>
+                                                                                <th class="text-center">Emp Id</th>
+                                                                                <th class="text-center">Actions</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach ($employees as $employee)
+                                                                                <tr class="bg-white">
+                                                                                    <td class="text-center text-dark">
+                                                                                        {{ $employee->id }}</td>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="widget-heading text-dark">
+                                                                                            <a href=""
+                                                                                                class="updateEmployee"
+                                                                                                data-name="name"
+                                                                                                data-type="text"
+                                                                                                data-pk="{{ $employee->id }}"
+                                                                                                data-title="Enter name">{{ $employee->name }}</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateEmployee"
+                                                                                            data-name="email"
+                                                                                            data-type="email"
+                                                                                            data-pk="{{ $employee->id }}"
+                                                                                            data-title="Enter email">{{ $employee->email }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateEmployee"
+                                                                                            data-name="phone"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $employee->id }}"
+                                                                                            data-title="Enter phone">{{ $employee->phone }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateEmployee"
+                                                                                            data-name="empId"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $employee->id }}"
+                                                                                            data-title="Enter empId">{{ $employee->empId }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <a class="btn btn-danger btn-sm"
+                                                                                            href="{{ route('admin.destroyEmployee', $employee->id) }}">Delete</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
                                                                 </div>
-                                                                <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">
-                                                                        {{ Auth::guard('admin')->user()->name }}</div>
-                                                                    <div class="widget-subheading opacity-7">Web Developer
+                                                                <div class="d-block text-right card-footer">
+                                                                    <a href="{{ route('admin.createemp') }}"
+                                                                        class="btn-wide btn btn-success btn-sm">Add New
+                                                                        Employee</a>
+                                                                    <a href="{{ route('admin.employees') }}"
+                                                                        class="btn-wide btn btn-orange text-white btn-sm">View
+                                                                        All
+                                                                        Employees</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab-pane fade show active" id="nav-first" role="tabpanel"
+                                                    aria-labelledby="nav-first-tab">
+                                                    <div class="col-md-12">
+                                                        <div class="mb-md-0">
+                                                            <div class="card-body">
+                                                                <div class="alert alert-dark text-white" role="alert">
+                                                                    Warning : By deleting a user , you'll delete all the
+                                                                    records
+                                                                    in the following tables :
+                                                                    desires, applieddesires, pre_decision,
+                                                                    final_decision,
+                                                                    questions!
+                                                                </div>
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                                        @csrf
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="text-center">ID</th>
+                                                                                <th>Name</th>
+                                                                                <th class="text-center">Email</th>
+                                                                                <th class="text-center">Phone</th>
+                                                                                <th class="text-center">Address</th>
+                                                                                <th class="text-center">Englsih</th>
+                                                                                <th class="text-center">Total</th>
+                                                                                <th class="text-center">Actions</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach ($userstodashboard as $userd)
+                                                                                <tr class="bg-white">
+                                                                                    <td class="text-center text-dark">
+                                                                                        {{ $userd->id }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div
+                                                                                            class="widget-heading text-dark">
+                                                                                            <a href=""
+                                                                                                class="updateuserd"
+                                                                                                data-name="name"
+                                                                                                data-type="text"
+                                                                                                data-pk="{{ $userd->id }}"
+                                                                                                data-title="Enter name">{{ $userd->name }}</a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateuserd"
+                                                                                            data-name="email"
+                                                                                            data-type="email"
+                                                                                            data-pk="{{ $userd->id }}"
+                                                                                            data-title="Enter name">{{ $userd->email }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateuserd"
+                                                                                            data-name="phone"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $userd->id }}"
+                                                                                            data-title="Enter name">{{ $userd->phone }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateuserd"
+                                                                                            data-name="address"
+                                                                                            data-type="text"
+                                                                                            data-pk="{{ $userd->id }}"
+                                                                                            data-title="Enter name">{{ $userd->address }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateuserd"
+                                                                                            data-name="englishDegree"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $userd->id }}"
+                                                                                            data-title="Enter name">{{ $userd->englishDegree }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center text-dark">
+                                                                                        <a href="" class="updateuserd"
+                                                                                            data-name="highSchoolTotalMarks"
+                                                                                            data-type="number"
+                                                                                            data-pk="{{ $userd->id }}"
+                                                                                            data-title="Enter name">{{ $userd->highSchoolTotalMarks }}</a>
+                                                                                    </td>
+                                                                                    <td class="text-center">
+                                                                                        <a class="btn btn-danger btn-sm"
+                                                                                            href="{{ route('admin.destroyUser', $userd->id) }}">Delete</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="d-block text-right card-footer">
+                                                                    <a href="{{ route('admin.createuser') }}"
+                                                                        class="btn-wide btn btn-success btn-sm">Add New
+                                                                        User</a>
+                                                                    <a href="{{ route('admin.users') }}"
+                                                                        class="btn-wide btn btn-orange text-white btn-sm">View
+                                                                        All
+                                                                        User</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="card mb-3 widget-content">
+                                                <div class="widget-content-outer">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left">
+                                                            <div class="widget-heading">Total Questions</div>
+                                                            <div class="widget-subheading">Not answered Questions!
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content-right">
+                                                            <div class="widget-numbers text-success"><span
+                                                                    class="ml-5">{{ $QuestionsCOUNTER }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="card mb-3 widget-content">
+                                                <div class="widget-content-outer">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left">
+                                                            <div class="widget-heading">Total Applied Students</div>
+                                                            <div class="widget-subheading">Total Applied Students</div>
+                                                        </div>
+                                                        <div class="widget-content-right">
+                                                            <div class="widget-numbers text-warning">
+                                                                <span
+                                                                    class="ml-5">{{ $BISCOUNTER + $FMICOUNTER + $ESCOUNTER }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-xl-4">
+                                            <div class="card mb-3 widget-content">
+                                                <div class="widget-content-outer">
+                                                    <div class="widget-content-wrapper">
+                                                        <div class="widget-content-left">
+                                                            <div class="widget-heading">Total Posts</div>
+                                                            <div class="widget-subheading">Total Blog Posts</div>
+                                                        </div>
+                                                        <div class="widget-content-right">
+                                                            <div class="widget-numbers text-danger"><span
+                                                                    class="ml-5">{{ $newsCOUNTER }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!--- faqs -->
+                                        <div class="card mb-4 mb-lg-0">
+                                            <div class="card p-0">
+                                                <div class="card-head mx-5 mt-2">
+                                                    <nav class="mt-4 text-center">
+                                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                            <a class="nav-link active" id="nav-applications-tab"
+                                                                data-toggle="pill" href="#nav-applications" role="tab"
+                                                                aria-controls="nav-applications" aria-selected="true"><span
+                                                                    class="text-dark">Applications</span></a>
+                                                            <a class="nav-link" id="nav-approved-tab"
+                                                                data-toggle="pill" href="#nav-approved" role="tab"
+                                                                aria-controls="nav-approved" aria-selected="true"><span
+                                                                    class="text-danger">Approved</span></a>
+                                                            <a class="nav-link" id="nav-rejected-tab"
+                                                                data-toggle="pill" href="#nav-rejected" role="tab"
+                                                                aria-controls="nav-rejected" aria-selected="false"><span
+                                                                    class="text-orange">Rejected</span></a>
+                                                            <a class="nav-link" id="nav-pending-tab"
+                                                                data-toggle="pill" href="#nav-pending" role="tab"
+                                                                aria-controls="nav-pending" aria-selected="false"><span
+                                                                    class="text-primary">Pending</span></a>
+                                                        </div>
+                                                    </nav>
+                                                </div>
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade" id="nav-pending" role="tabpanel"
+                                                        aria-labelledby="nav-pending-tab">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-md-0">
+                                                                <div class="card-body">
+                                                                    <p class="breadcrumb alert alert-dark text-small">
+                                                                        Accept /
+                                                                        Reject Pending Students</p>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-light table-striped">
+                                                                            <tr>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    #
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Name
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    English
+                                                                                    Grade</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Total
+                                                                                    Grades</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Average
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    firstDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    secondDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    thirdDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Status
+                                                                                </th>
+                                                                                <th colspan="3" class="text-center">
+                                                                                    Action
+                                                                                </th>
+                                                                            </tr>
+                                                                            @foreach ($users23 as $pending)
+                                                                                <tr class="align-item-center">
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->id }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->name }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->englishDegree }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->highSchoolTotalMarks }}
+                                                                                    </th>
+                                                                                    <th class="text-center text-orange">
+                                                                                        {{ round(((($pending->englishDegree / 60) * 100 + ($pending->highSchoolTotalMarks / 300) * 100) / 200) * 100,1) }}
+                                                                                        %
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->firstDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->secondDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->thirdDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $pending->status }}</th>
+                                                                                    <th colspan="2"
+                                                                                        class="d-flex justify-content-between m-1 p-1 w-20 text-center">
+                                                                                        <form
+                                                                                            action="{{ route('employee.approve', $pending->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.approve', $pending->id) }}"
+                                                                                                class="text-light btn bg-success"><i
+                                                                                                    class="fa-solid fa-check"></i></a>
+                                                                                        </form>
+                                                                                        <form
+                                                                                            action="{{ route('employee.reject', $pending->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.reject', $pending->id) }}"
+                                                                                                class="text-light btn bg-danger"><i
+                                                                                                    class="fa-solid fa-xmark"></i></a>
+                                                                                        </form>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center">{{ Auth::guard('admin')->user()->email }}
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="badge badge-warning">Pending</div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button type="button" id="PopoverCustomT-1"
-                                                            class="btn btn-primary btn-sm">Details</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center text-muted">#347</td>
-                                                    <td>
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-3">
-                                                                    <div class="widget-content-left">
-                                                                        <img width="40" class="rounded-circle"
-                                                                            src="assets/images/avatars/3.jpg" alt="">
+                                                    </div>
+                                                    <div class="tab-pane fade show active" id="nav-applications"
+                                                        role="tabpanel" aria-labelledby="nav-applications-tab">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-md-0">
+                                                                <div class="card-body">
+                                                                    <p class="breadcrumb alert alert-dark text-small">
+                                                                        Students
+                                                                        ordered by AVG</p>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-light table-striped">
+                                                                            <tr>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    #
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Name
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    English
+                                                                                    Grade</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Total
+                                                                                    Grades</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Average
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    firstDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    secondDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    thirdDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Status
+                                                                                </th>
+                                                                                <th colspan="3" class="text-center">
+                                                                                    Action
+                                                                                </th>
+                                                                            </tr>
+                                                                            @foreach ($users22 as $data)
+                                                                                <tr class="align-item-center">
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->id }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->name }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->englishDegree }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->highSchoolTotalMarks }}
+                                                                                    </th>
+                                                                                    <th class="text-center text-orange">
+                                                                                        {{ round(((($data->englishDegree / 60) * 100 + ($data->highSchoolTotalMarks / 300) * 100) / 200) * 100, 1) }}
+                                                                                        %
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->firstDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->secondDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->thirdDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $data->status }}</th>
+                                                                                    <th colspan="2"
+                                                                                        class="d-flex justify-content-between m-1 p-1 w-20 text-center">
+                                                                                        <form
+                                                                                            action="{{ route('employee.approve', $data->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.approve', $data->id) }}"
+                                                                                                class="text-light btn bg-success"><i
+                                                                                                    class="fa-solid fa-check"></i></a>
+                                                                                        </form>
+                                                                                        <form
+                                                                                            action="{{ route('employee.reject', $data->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.reject', $data->id) }}"
+                                                                                                class="text-light btn bg-danger"><i
+                                                                                                    class="fa-solid fa-xmark"></i></a>
+                                                                                        </form>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </table>
                                                                     </div>
-                                                                </div>
-                                                                <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">Ruben Tillman</div>
-                                                                    <div class="widget-subheading opacity-7">Etiam sit amet
-                                                                        orci eget</div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center">Berlin</td>
-                                                    <td class="text-center">
-                                                        <div class="badge badge-success">Completed</div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button type="button" id="PopoverCustomT-2"
-                                                            class="btn btn-primary btn-sm">Details</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center text-muted">#321</td>
-                                                    <td>
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-3">
-                                                                    <div class="widget-content-left">
-                                                                        <img width="40" class="rounded-circle"
-                                                                            src="assets/images/avatars/2.jpg" alt="">
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-approved" role="tabpanel"
+                                                        aria-labelledby="nav-approved-tab">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-md-0">
+                                                                <div class="card-body">
+                                                                    <p class="breadcrumb alert alert-dark text-small">
+                                                                        Approved
+                                                                        Students</p>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-light table-striped">
+                                                                            <tr>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    #
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Name
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    English
+                                                                                    Grade</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Total
+                                                                                    Grades</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Average
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    firstDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    secondDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    thirdDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Status
+                                                                                </th>
+                                                                                <th colspan="3" class="text-center">
+                                                                                    Action
+                                                                                </th>
+                                                                            </tr>
+                                                                            @foreach ($users24 as $approved)
+                                                                                <tr class="align-item-center">
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->id }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->name }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->englishDegree }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->highSchoolTotalMarks }}
+                                                                                    </th>
+                                                                                    <th class="text-center text-orange">
+                                                                                        {{ round(((($approved->englishDegree / 60) * 100 + ($approved->highSchoolTotalMarks / 300) * 100) / 200) * 100, 1) }}
+                                                                                        %
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->firstDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->secondDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->thirdDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $approved->status }}</th>
+                                                                                    <th colspan="2"
+                                                                                        class="d-flex justify-content-between m-1 p-1 w-20 text-center">
+                                                                                        <form
+                                                                                            action="{{ route('employee.approve', $approved->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.approve', $approved->id) }}"
+                                                                                                class="text-light btn bg-success"><i
+                                                                                                    class="fa-solid fa-check"></i></a>
+                                                                                        </form>
+                                                                                        <form
+                                                                                            action="{{ route('employee.reject', $approved->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.reject', $approved->id) }}"
+                                                                                                class="text-light btn bg-danger"><i
+                                                                                                    class="fa-solid fa-xmark"></i></a>
+                                                                                        </form>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </table>
                                                                     </div>
-                                                                </div>
-                                                                <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">Elliot Huber</div>
-                                                                    <div class="widget-subheading opacity-7">Lorem ipsum
-                                                                        dolor sic</div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center">London</td>
-                                                    <td class="text-center">
-                                                        <div class="badge badge-danger">In Progress</div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button type="button" id="PopoverCustomT-3"
-                                                            class="btn btn-primary btn-sm">Details</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center text-muted">#55</td>
-                                                    <td>
-                                                        <div class="widget-content p-0">
-                                                            <div class="widget-content-wrapper">
-                                                                <div class="widget-content-left mr-3">
-                                                                    <div class="widget-content-left">
-                                                                        <img width="40" class="rounded-circle"
-                                                                            src="assets/images/avatars/1.jpg" alt="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="widget-content-left flex2">
-                                                                    <div class="widget-heading">Vinnie Wagstaff</div>
-                                                                    <div class="widget-subheading opacity-7">UI Designer
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-rejected" role="tabpanel"
+                                                        aria-labelledby="nav-rejected-tab">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-md-0">
+                                                                <div class="card-body">
+                                                                    <p class="breadcrumb alert alert-dark text-small">
+                                                                        Rejected
+                                                                        Students</p>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-light table-striped">
+                                                                            <tr>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    #
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Name
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    English
+                                                                                    Grade</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Total
+                                                                                    Grades</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Average
+                                                                                </th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    firstDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    secondDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    thirdDesire</th>
+                                                                                <th colspan="1" class="text-center">
+                                                                                    Status
+                                                                                </th>
+                                                                                <th colspan="3" class="text-center">
+                                                                                    Action
+                                                                                </th>
+                                                                            </tr>
+                                                                            @foreach ($users25 as $rejected)
+                                                                                <tr class="align-item-center">
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->id }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->name }}</th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->englishDegree }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->highSchoolTotalMarks }}
+                                                                                    </th>
+                                                                                    <th class="text-center text-orange">
+                                                                                        {{ round(((($rejected->englishDegree / 60) * 100 + ($rejected->highSchoolTotalMarks / 300) * 100) / 200) * 100, 1) }}
+                                                                                        %
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->firstDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->secondDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->thirdDesire }}
+                                                                                    </th>
+                                                                                    <th class="text-center">
+                                                                                        {{ $rejected->status }}</th>
+                                                                                    <th colspan="2"
+                                                                                        class="d-flex justify-content-between m-1 p-1 w-20 text-center">
+                                                                                        <form
+                                                                                            action="{{ route('employee.approve', $rejected->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.approve', $rejected->id) }}"
+                                                                                                class="text-light btn bg-success"><i
+                                                                                                    class="fa-solid fa-check"></i></a>
+                                                                                        </form>
+                                                                                        <form
+                                                                                            action="{{ route('employee.reject', $rejected->id) }}"
+                                                                                            method="PUT"
+                                                                                            enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <a href="{{ route('employee.reject', $rejected->id) }}"
+                                                                                                class="text-light btn bg-danger"><i
+                                                                                                    class="fa-solid fa-xmark"></i></a>
+                                                                                        </form>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            @endforeach
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                    <td class="text-center">Amsterdam</td>
-                                                    <td class="text-center">
-                                                        <div class="badge badge-info">On Hold</div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button type="button" id="PopoverCustomT-4"
-                                                            class="btn btn-primary btn-sm">Details</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="d-block text-center card-footer">
-                                        <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger"><i
-                                                class="pe-7s-trash btn-icon-wrapper"> </i></button>
-                                        <button class="btn-wide btn btn-success">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card-shadow-danger mb-3 widget-chart widget-chart2 text-left card">
-                                    <div class="widget-content">
-                                        <div class="widget-content-outer">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left pr-2 fsize-1">
-                                                    <div class="widget-numbers mt-0 fsize-3 text-danger">71%</div>
-                                                </div>
-                                                <div class="widget-content-right w-100">
-                                                    <div class="progress-bar-xs progress">
-                                                        <div class="progress-bar bg-danger" role="progressbar"
-                                                            aria-valuenow="71" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 71%;"></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="widget-content-left fsize-1">
-                                                <div class="text-muted opacity-6">Income Target</div>
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card-shadow-success mb-3 widget-chart widget-chart2 text-left card">
-                                    <div class="widget-content">
-                                        <div class="widget-content-outer">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left pr-2 fsize-1">
-                                                    <div class="widget-numbers mt-0 fsize-3 text-success">54%</div>
-                                                </div>
-                                                <div class="widget-content-right w-100">
-                                                    <div class="progress-bar-xs progress">
-                                                        <div class="progress-bar bg-success" role="progressbar"
-                                                            aria-valuenow="54" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 54%;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left fsize-1">
-                                                <div class="text-muted opacity-6">Expenses Target</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card-shadow-warning mb-3 widget-chart widget-chart2 text-left card">
-                                    <div class="widget-content">
-                                        <div class="widget-content-outer">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left pr-2 fsize-1">
-                                                    <div class="widget-numbers mt-0 fsize-3 text-warning">32%</div>
-                                                </div>
-                                                <div class="widget-content-right w-100">
-                                                    <div class="progress-bar-xs progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar"
-                                                            aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 32%;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left fsize-1">
-                                                <div class="text-muted opacity-6">Spendings Target</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="card-shadow-info mb-3 widget-chart widget-chart2 text-left card">
-                                    <div class="widget-content">
-                                        <div class="widget-content-outer">
-                                            <div class="widget-content-wrapper">
-                                                <div class="widget-content-left pr-2 fsize-1">
-                                                    <div class="widget-numbers mt-0 fsize-3 text-info">89%</div>
-                                                </div>
-                                                <div class="widget-content-right w-100">
-                                                    <div class="progress-bar-xs progress">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"
-                                                            style="width: 89%;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="widget-content-left fsize-1">
-                                                <div class="text-muted opacity-6">Totals Target</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="app-wrapper-footer">
-                        <div class="app-footer">
-                            <div class="app-footer__inner">
-                                <div class="app-footer-left">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 1
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 2
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="app-footer-right">
-                                    <ul class="nav">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                Footer Link 3
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link">
-                                                <div class="badge badge-success mr-1 ml-0">
-                                                    <small>NEW</small>
-                                                </div>
-                                                Footer Link 4
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
             </div>
-        </div>
-        <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js">
-        </script>
-    </body>
+            <script type="text/javascript">
+                $.fn.editable.defaults.mode = 'inline';
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                });
+
+                $('.update').editable({
+                    url: "{{ route('admin.update') }}",
+                    type: 'text',
+                    pk: 1,
+                    name: 'name',
+                    title: 'Enter name',
+
+                    type: 'email',
+                    pk: 1,
+                    name: 'email',
+                    title: 'Enter email',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'phone',
+                    title: 'Enter phone',
+
+                    type: 'password',
+                    pk: 1,
+                    name: 'password',
+                    title: 'Enter password',
+
+                });
+                $('.updateEmployee').editable({
+
+                    url: "{{ route('admin.empUpdate') }}",
+                    type: 'text',
+                    pk: 1,
+                    name: 'name',
+                    title: 'Enter name',
+
+                    type: 'email',
+                    pk: 1,
+                    name: 'email',
+                    title: 'Enter email',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'phone',
+                    title: 'Enter phone',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'empId',
+                    title: 'Enter empId',
+
+                    type: 'password',
+                    pk: 1,
+                    name: 'password',
+                    title: 'Enter password',
+                });
+                $('.updateuserd').editable({
+
+                    url: "{{ route('admin.userdUpdate') }}",
+                    type: 'text',
+                    pk: 1,
+                    name: 'name',
+                    title: 'Enter name',
+
+                    type: 'email',
+                    pk: 1,
+                    name: 'email',
+                    title: 'Enter email',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'phone',
+                    title: 'Enter phone',
+
+                    type: 'text',
+                    pk: 1,
+                    name: 'address',
+                    title: 'Enter address',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'englishDegree',
+                    title: 'Enter englishDegree',
+
+                    type: 'number',
+                    pk: 1,
+                    name: 'highSchoolTotalMarks',
+                    title: 'Enter highSchoolTotalMarks',
+
+                    type: 'password',
+                    pk: 1,
+                    name: 'password',
+                    title: 'Enter password',
+                });
+            </script>
+            <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js">
+            </script>
+        </body>
+    </section>
 @endsection

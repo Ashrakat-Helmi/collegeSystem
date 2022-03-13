@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\employee;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
+
     function create(Request $request)
     {
         $request->validate([
@@ -59,6 +61,17 @@ class EmployeeController extends Controller
         }
     }
 
+    
+    function index()
+    {
+        $users = User::all();
+        dd($users);
+        $users = User::orderBy('created_at', 'Asc')->limit(10)->get();
+        return view('dashboard.employee.home', [
+            'users' => $users,
+        ]); //returns the view with posts
+
+    }
     function logout()
     {
         Auth::guard('employee')->logout();

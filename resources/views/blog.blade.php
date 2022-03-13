@@ -17,12 +17,12 @@
                 </div>
             </div>
             @forelse($posts as $post)
-                <ul>
+<ul>
                     <li><a href="./blog/{{ $post->id }}">{{ ucfirst($post->title) }}</a></li>
                 </ul>
-            @empty
+        @empty
                 <p class="text-warning">No blog Posts available</p>
-            @endforelse
+@endforelse
         </div>
     </div>
 </div>
@@ -48,33 +48,34 @@
 
                 <div class="col-lg-8 entries">
                     @foreach ($posts as $post)
-                    <article class="entry">
+                        <article class="entry">
 
-                        <div class="entry-img">
-                            <img src="{{ asset('/assets/img/blog/news-1.jpg') }}" alt="" class="img-fluid">
-                        </div>
-
-                        <h2 class="entry-title">
-                            <a href="blog-single.html">{{ $post->title }}</a>
-                        </h2>
-
-                        <div class="entry-meta">
-                            <ul>
-                                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                                        href="blog-single.html"><time datetime="2020-01-01">{{ $post->created_at }}</time></a></li>
-
-                            </ul>
-                        </div>
-
-                        <div class="entry-content">
-                            <p>
-                                {{ $post->description }}
-                            </p>
-                            <div class="read-more">
-                                <a href="blog-single.html">Read More</a>
+                            <div class="entry-img">
+                                <img src="{{ asset('/assets/img/blog/news-1.jpg') }}" alt="" class="img-fluid">
                             </div>
-                        </div>
-                    </article><!-- End blog entry -->
+
+                            <h2 class="entry-title">
+                                <a href="blog-single.html">{{ $post->title }}</a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                                            href="blog-single.html"><time
+                                                datetime="2020-01-01">{{ $post->created_at }}</time></a></li>
+
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+                                <p>
+                                    {{ $post->description }}
+                                </p>
+                                <div class="read-more">
+                                    <a href="blog-single.html">Read More</a>
+                                </div>
+                            </div>
+                        </article><!-- End blog entry -->
                     @endforeach
 
                     <div class="blog-pagination">
@@ -100,11 +101,11 @@
                         <h3 class="sidebar-title">Recent Posts</h3>
                         <div class="sidebar-item recent-posts">
                             @foreach ($posts as $post)
-                            <div class="post-item clearfix text-wrap">
-                                <img src="assets/img/blog/blog-recent-1.jpg" alt="">
-                                <h4 class="text-wrap"><a href="blog-single.html">{{ $post->title }}</a></h4>
-                                <time datetime="2020-01-01">{{ $post->created_at }}</time>
-                            </div>
+                                <div class="post-item clearfix text-wrap">
+                                    <img src="assets/img/blog/blog-recent-1.jpg" alt="">
+                                    <h4 class="text-wrap"><a href="blog-single.html">{{ $post->title }}</a></h4>
+                                    <time datetime="2020-01-01">{{ $post->created_at }}</time>
+                                </div>
                             @endforeach
                         </div><!-- End sidebar recent posts-->
 

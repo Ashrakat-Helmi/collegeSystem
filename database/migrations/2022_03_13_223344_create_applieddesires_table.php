@@ -14,10 +14,11 @@ class CreateApplieddesiresTable extends Migration
     public function up()
     {
         Schema::create('applieddesires', function (Blueprint $table) {
+            $table->bigInteger('id', true);
             $table->string('firstDesire');
             $table->string('secondDesire');
             $table->string('thirdDesire');
-            $table->bigInteger('id')->default(0)->index('id');
+            $table->bigInteger('userId')->default(0)->index('id');
             $table->string('studentName');
             $table->timestamp('createdAt')->useCurrent();
             $table->dateTime('updatedAt')->nullable()->useCurrent();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePreDecisionsTable extends Migration
+class CreateFinalDecisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreatePreDecisionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pre_decisions', function (Blueprint $table) {
-            $table->bigInteger('id', true);
+        Schema::create('final_decisions', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('userId')->index('userId');
+            $table->bigInteger('preDecisionId')->index('predId');
+            $table->string('programId');
             $table->string('status');
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ class CreatePreDecisionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pre_decisions');
+        Schema::dropIfExists('final_decisions');
     }
 }

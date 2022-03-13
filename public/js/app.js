@@ -44322,8 +44322,8 @@ __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bo
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\Course\Laravel\collegesys - Copy\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\Course\Laravel\collegesys - Copy\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\Course\Laravel\collegesys - before-admin - 10-3-2022\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\Course\Laravel\collegesys - before-admin - 10-3-2022\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

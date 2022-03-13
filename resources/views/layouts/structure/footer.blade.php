@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer class="mt-5" id="footer">
 
     <div class="footer-top">
         <div class="container">

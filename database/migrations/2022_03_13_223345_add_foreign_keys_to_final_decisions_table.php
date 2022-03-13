@@ -14,9 +14,8 @@ class AddForeignKeysToFinalDecisionsTable extends Migration
     public function up()
     {
         Schema::table('final_decisions', function (Blueprint $table) {
-            $table->foreign(['userId'], 'final_decisions_ibfk_1')->references(['id'])->on('users');
-            $table->foreign(['programId'], 'final_decisions_ibfk_2')->references(['id'])->on('programs');
-            $table->foreign(['preDecisionId'], 'final_decisions_ibfk_3')->references(['id'])->on('pre_decisions');
+            $table->foreign(['userId'], 'final_decisions_ibfk_1')->references(['id'])->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreign(['preDecisionId'], 'final_decisions_ibfk_3')->references(['id'])->on('pre_decisions')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
@@ -29,7 +28,6 @@ class AddForeignKeysToFinalDecisionsTable extends Migration
     {
         Schema::table('final_decisions', function (Blueprint $table) {
             $table->dropForeign('final_decisions_ibfk_1');
-            $table->dropForeign('final_decisions_ibfk_2');
             $table->dropForeign('final_decisions_ibfk_3');
         });
     }

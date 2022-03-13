@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PreDecision;
+use App\Models\desires;
+use App\Http\Controllers\UserManagementController;
+use Illuminate\Support\Facades\DB;
+use App\Models\appliedDesires;
 
 class UserController extends Controller
 {
+
     function create(Request $request)
     {
         $request->validate([
@@ -61,10 +67,12 @@ class UserController extends Controller
         }
     }
 
+    public function index()
+    {
+    }
     function logout()
     {
         Auth::guard('web')->logout();
         return redirect('/');
     }
-
 }

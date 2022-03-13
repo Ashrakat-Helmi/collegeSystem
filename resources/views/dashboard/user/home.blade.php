@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
 @section('content')
     <section style="background-color: #eee;">
-        <div class="container py-5">
+        <div class="container">
             <div class="row">
                 <div class="col">
-                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
-                        <ol class="breadcrumb mb-0">
+                    <nav aria-label="breadcrumb" class="bg-white rounded-3 p-2 mb-4">
+                        <ol class="breadcrumb bg-light mb-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">User</a></li>
                             <li class="breadcrumb-item active" aria-current="page">User Profile</li>
@@ -14,7 +13,6 @@
                     </nav>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -24,138 +22,196 @@
                             <h5 class="my-3">{{ Auth::guard('web')->user()->name }}</h5>
                             <p class="text-muted mb-1">{{ Auth::guard('web')->user()->email }}</p>
                             <p class="text-muted mb-1">{{ Auth::guard('web')->user()->gender }}</p>
-                            <a href="{{ route('user.logout') }}"
-                                onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                                class="btn btn-outline-primary ms-1">Logout</a>
-                            <form action="{{ route('user.logout') }}" method="POST" class="d-none"
-                                id="logout-form">@csrf</form>
+
 
                         </div>
                     </div>
                     <div class="card mb-4 mb-lg-0">
                         <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fas fa-globe fa-lg text-warning"></i>
-                                    <p class="mb-0">https://mdbootstrap.com</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                    <p class="mb-0">@mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
-                                </li>
-                            </ul>
+                            <div class="row">
+                                <div class="mb-md-0">
+                                    <div class="card-body">
+                                        <p class="breadcrumb bg-light text-small">Grades Average</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+
+                                                <p class="mb-0">English Grade</p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="text-muted text-right mb-0">
+                                                    {{ Auth::guard('web')->user()->englishDegree }}
+                                                    <span class="text-orange">/ 60</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="mb-0">Total Marks</p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <p class="text-muted text-right mb-0">
+                                                    {{ Auth::guard('web')->user()->highSchoolTotalMarks }} <span
+                                                        class="text-orange">/ 300</span></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <p class="mb-0">Average</p>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p class="text-right text-orange mb-0">
+                                                    {{ round((((Auth::guard('web')->user()->englishDegree / 60) * 100 +(Auth::guard('web')->user()->highSchoolTotalMarks / 300) * 100) /200) *100,1) }}
+                                                    %</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="card mb-4">
                         <div class="card-body">
+                            <p class="breadcrumb bg-light text-small">Account Information</p>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <p class="mb-0">Full Name</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <p class="text-muted mb-0">{{ Auth::guard('web')->user()->name }}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <p class="mb-0">Email</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <p class="text-muted mb-0">{{ Auth::guard('web')->user()->email }}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <p class="mb-0">Address</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <p class="text-muted mb-0">{{ Auth::guard('web')->user()->address }}</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <p class="mb-0">Phone</p>
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <p class="text-muted mb-0">{{ Auth::guard('web')->user()->phone }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">English Grade</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::guard('web')->user()->englishDegree }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">High School Total Marks</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ Auth::guard('web')->user()->highSchoolTotalMarks }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="text-center text-small">Desires Application Form</p>
-                                    <a class="btn btn-apply btn-block text-center" href="{{ route('desires.create') }}">Register your Desires</a>
-                                    <a class="btn btn-dark btn-block text-center" href="{{ route('desires.index') }}">View My Application</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-body">
-                                    <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span>
-                                        Project Status</p>
-                                    <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                    <div class="progress rounded" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                    <div class="progress rounded mb-2" style="height: 5px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                                            aria-valuemin="0" aria-valuemax="100"></div>
+                    <!--- faqs -->
+                    <div class="card mb-4 mb-lg-0">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="mb-md-0">
+                                    <div class="card-body">
+                                        <p class="breadcrumb bg-light text-small">Frequently Asked Questions</p>
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                    <h2 class="mb-0">
+                                                        <button
+                                                            class="btn text-right text-dark text-decoration-none btn-link btn-block text-left"
+                                                            type="button" data-toggle="collapse" data-target="#collapseOne"
+                                                            aria-expanded="true" aria-controls="collapseOne" dir="rtl">
+                                                            ما هو برنامج BIS ؟
+                                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                                    data-parent="#accordionExample" dir="rtl">
+                                                    <div class="card-body text-right" dir="rtl">
+                                                        يقدم تخصصاً فريداً يجمع ما بين إدارة الأعمال ونظم المعلومات يضم
+                                                        البرنامج نخبة منتقاة من أساتذة كليتى التجارة والحاسبات
+                                                        والمعلومات
+                                                        <br>
+                                                        يعتمد البرنامج على نظام الساعات المعتمدة، وهو ما يعطى قدراً من
+                                                        المرونة بالنسبة للطلاب. لغة الدراسة بالبرنامج هى اللغة
+                                                        الإنجليزية.
+                                                        توافر معامل حديثة لتدريب الطلاب أثناء الدراسة. <br>يتيح البرنامج
+                                                        فرص
+                                                        دورات تدريبية وورش عمل متميزة للطلاب أثناء فترة الدراسة.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h2 class="mb-0">
+                                                        <button
+                                                            class="btn text-right text-dark text-decoration-none btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                                            aria-expanded="false" aria-controls="collapseTwo" dir="rtl">
+                                                            ما هو برنامج FMI ؟
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                                    data-parent="#accordionExample" dir="rtl">
+                                                    <div class="card-body text-right" dir="rtl">
+                                                        هو الاختصار لمسمى " الأسواق والمنشآت المالية" Financial Markets
+                                                        &
+                                                        Institutions . وهو برنامج دراسي أكاديمى تطبيقى يهدف إلى إعداد
+                                                        خريج
+                                                        متميز لسوق العمل فى القطاع المالى والمصرفى بشكل خاص إلى جانب
+                                                        عمليات
+                                                        الادارة المالية والتقييم الاقتصادى والتمويل والاستثمار بالمؤسسات
+                                                        الاقتصادية المختلفة، فعلى الرغم من زيادة أعداد خريجى كليات
+                                                        التجارة
+                                                        من الشعب التقليدية إلا أنه معظمهم غير مؤهلين للعمل فى القطاع
+                                                        المالى
+                                                        بالبنوك وشركات التأمين وشركات الصرافة والبورصة وشركات الوساطة فى
+                                                        الأوراق المالية... الى آخره
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <h2 class="mb-0">
+                                                        <button
+                                                            class="btn text-right text-dark text-decoration-none btn-link btn-block text-left collapsed"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#collapseThree" aria-expanded="false"
+                                                            aria-controls="collapseThree" dir="rtl">
+                                                            ما هو برنامج ES ؟
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseThree" class="collapse"
+                                                    aria-labelledby="headingThree" data-parent="#accordionExample"
+                                                    dir="rtl">
+                                                    <div class="card-body text-right" dir="rtl">
+                                                        وتتميز الدراسة فى شعبة اللغة الانجليزية بانخفاض كثافة الفصول
+                                                        الدراسية وتنفيذ جميع المحاضرات داخل حجرات وقاعات صغيرة لا تتعدى
+                                                        100
+                                                        طالب وهناك اتجاه الى خفض العدد قى الشعب العامة الى 80 ( فى حالة
+                                                        الفرقتين الاولى والثانية)، اما الدراسة فى شعب التخصص ( الفرقتين
+                                                        الثالثة والرابعة ) فالكثافة داخل الفصول تهبط فيها بصورة واضحة
+                                                        ليصل
+                                                        العدد فى بعض التخصصات الى اقل من 25 طالب. ويسمح هذا المناخ بدرجة
+                                                        عالية من التفاعل بين الطالب والاستاذ وارتفاع القدرة التحصيلية
+                                                        للطلاب
+                                                        واستغلال طاقة الاساتذة الى اقصى حد.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -165,14 +221,4 @@
             </div>
         </div>
     </section>
-    <script>
-        $(document).ready(function() {
-            $("select").change(function(e) {
-                $("select option").removeAttr('disabled');
-                $("select").each(function(i, s) {
-                    $("select").not(s).find("option[value=" + $(s).val() + "]").attr('disabled',
-                        'disabled');
-                });
-            });
-        });
-    @endsection
+@endsection

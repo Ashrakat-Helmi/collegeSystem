@@ -1,5 +1,4 @@
-@include('layouts.structure.header')
-@include('layouts.structure.navbar')
-@include('layouts.structure.homepage')
-
-@include('layouts.structure.footer')
+@extends('layouts.app')
+@section('content')
+    @include('layouts.structure.homepage')
+@endsection

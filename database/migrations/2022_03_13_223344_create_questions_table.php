@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('question');
-            $table->string('answer');
+            $table->string('answer')->default('Please wait for our response.');
             $table->bigInteger('userId')->index('userId');
             $table->timestamps();
         });

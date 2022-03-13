@@ -16,7 +16,7 @@ class employee extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','empId','gender',
+        'name', 'email', 'password', 'phone', 'empId', 'gender',
     ];
 
     /**
@@ -36,4 +36,6 @@ class employee extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public $timestamps = true;
 }

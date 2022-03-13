@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AppliedDesiresController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
 
     public function index()
@@ -55,14 +51,20 @@ class AppliedDesiresController extends Controller
         // student name
         $ESNAME = appliedDesires::select('studentName')->where('firstDesire', 'ES')->get();
 
+        $users = DB::table('users')
+            ->join('applieddesires', 'users.id', '=', 'applieddesires.userId')
+            ->join('pre_decisions', 'users.id', '=', 'pre_decisions.userId')
+            ->select('users.*', 'applieddesires.*',  'pre_decisions.status')
+            ->groupBy('englishDegree')
+            ->get();
 
-        //
         return view('appliedStudents', [
 
             'BIS' => $BIS,
             'FMI' => $FMI,
             'ES'  => $ES,
+            'users' => $users
 
-        ], compact('BISCOUNTER', 'BISNAME', 'FMICOUNTER', 'FMINAME', 'ESCOUNTER', 'ESNAME')); //returns the view with BIS
+        ], compact('BISCOUNTER', 'BISNAME', 'FMICOUNTER', 'FMINAME', 'ESCOUNTER', 'ESNAME', 'users')); //returns the view with BIS
     }
 }

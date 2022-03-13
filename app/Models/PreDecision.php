@@ -8,6 +8,7 @@ class PreDecision extends Model
 {
 
     protected $fillable = [
+        'id',
         'userId',
         'status',
     ];

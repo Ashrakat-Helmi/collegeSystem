@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PreDecision;
 use Illuminate\Http\Request;
+use App\Models\appliedDesires;
+use Illuminate\Support\Facades\DB;
 
 class PreDecisionController extends Controller
 {
@@ -14,9 +16,8 @@ class PreDecisionController extends Controller
      */
     public function index()
     {
-        //
+    
     }
-
     /**
      * Show the form for creating a new resource.
      *

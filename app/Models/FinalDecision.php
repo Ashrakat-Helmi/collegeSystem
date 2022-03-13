@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinalDecision extends Model
 {
     protected $fillable = [
-        'userId','preDecisionId','programId','status',
+        'id', 'userId', 'preDecisionId', 'programId', 'status',
     ];
-    protected $table ='finalDecision';
+    protected $table = 'final_decisions';
 }
